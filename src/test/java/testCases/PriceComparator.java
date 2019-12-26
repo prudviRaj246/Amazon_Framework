@@ -1,5 +1,8 @@
 package testCases;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
+
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
@@ -15,7 +18,7 @@ public class PriceComparator extends BaseClass {
 	
 	
 	@Test
-	public void priceComparatorTestCase()
+	public void priceComparatorTestCase() throws ParseException
 	{
 		HomePage_Amazon  amazon_home=new HomePage_Amazon(driver);
 		SearchresultPage_Amazon amazon_search=new SearchresultPage_Amazon(driver);
@@ -36,7 +39,7 @@ public class PriceComparator extends BaseClass {
 		flipkart_home.enterSearchBox(itemName);
 		flipkart_home.clickSearchButton();
 		itemName=flipkart_search.getItemName();
-		flipkartPrice=Integer.parseInt(flipkart_search.getPrice().replaceAll(",", "").replaceAll("?", ""));
+		flipkartPrice=getIntValue(flipkart_search.getPrice());
 		
 		
 		if(amazonPrice < flipkartPrice)
@@ -50,6 +53,11 @@ public class PriceComparator extends BaseClass {
 		else
 			System.out.println("Both the sites are having same prices so you can buy which ever site u want to buy");
 			
+	}
+	
+	public int getIntValue(String price_value)
+	{
+		return Integer.parseInt(price_value.replaceAll("[^a-zA-Z0-9]", ""));
 	}
 	
 }
