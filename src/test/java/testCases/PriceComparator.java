@@ -35,7 +35,7 @@ public class PriceComparator extends BaseClass {
 		SearchresultPage_Flipkart flipkart_search=new SearchresultPage_Flipkart(driver);
 		
 		driver.get(flipkartURL);
-		driver.findElement(By.xpath("//button[@class='_2AkmmA _29YdH8']")).click();
+		flipkart_home.clickCloseBtn();
 		flipkart_home.enterSearchBox(itemName);
 		flipkart_home.clickSearchButton();
 		itemName=flipkart_search.getItemName();
